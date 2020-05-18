@@ -1,34 +1,44 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import { takeLatest, put } from 'redux-saga/effects';
+import { IBeerItem } from '../../models';
+import { BeersActionTypes } from '../actions/beersActions';
 
-import { BeersActionTypes } from '../actions/beersActions'
-
-function* loadBeersAsync () {
-  yield put({ type: BeersActionTypes.LOADING_BEERS })
+function* loadBeersAsync() {
+  yield put({ type: BeersActionTypes.LOADING_BEERS });
 
   const req = yield fetch(
     'https://api.punkapi.com/v2/beers'
   ).then(res =>
     res.json().then(data => ({
       ok: res.ok,
-      data
+      data,
     }))
-  )
+  );
 
   if (req.ok) {
     yield put({
       type: BeersActionTypes.LOADED_BEERS,
-      payload: req.data
-    })
+      // Images are mocked only for stetics porpuses
+      payload: req.data.map((beer: IBeerItem) => {
+        beer.image_url = `./img/items/${beer.id}.webp`;
+        beer.first_brewed = new Date(
+          ('01/' + beer.first_brewed).replace(
+            /(\d{2})\/(\d{2})\/(\d{4})/,
+            '$2/$1/$3'
+          )
+        );
+        return beer;
+      }),
+    });
   } else {
     yield put({
-      type: BeersActionTypes.LOADING_BEERS_FAILED
-    })
+      type: BeersActionTypes.LOADING_BEERS_FAILED,
+    });
   }
 }
 
-export function* watchLoadBeers () {
+export function* watchLoadBeers() {
   yield takeLatest(
     BeersActionTypes.LOAD_BEERS,
     loadBeersAsync
-  )
+  );
 }

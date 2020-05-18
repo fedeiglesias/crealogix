@@ -1,46 +1,61 @@
-import { ApiStatus, IBeerItem } from '../../models'
+import { ApiStatus, IBeerItem } from '../../models';
 import {
   BeersAction,
-  BeersActionTypes
-} from '../actions/beersActions'
+  BeersActionTypes,
+} from '../actions/beersActions';
 
 export interface IBeersState {
-  loading: ApiStatus
-  page: number
+  loading: ApiStatus;
+  pagination: {
+    page: number;
+    results: number;
+  };
   filters: {
-    from: string | null
-    to: string | null
-  }
-  data: IBeerItem[]
+    from: Date | null;
+    to: Date | null;
+  };
+  data: IBeerItem[];
 }
 
 export const initialBeersState: IBeersState = {
   loading: ApiStatus.LOADING,
-  page: 1,
+  pagination: {
+    page: 1,
+    results: 6,
+  },
   filters: {
     from: null,
-    to: null
+    to: null,
   },
-  data: []
-}
+  data: [],
+};
 
-export default function beersReducer (
+export default function beersReducer(
   state: IBeersState = initialBeersState,
   action: BeersAction
 ): IBeersState {
   switch (action.type) {
     case BeersActionTypes.LOAD_BEERS:
     case BeersActionTypes.LOADING_BEERS:
-      return { ...state, loading: ApiStatus.LOADING }
+      return { ...state, loading: ApiStatus.LOADING };
 
     case BeersActionTypes.LOADED_BEERS:
       return {
         ...state,
         loading: ApiStatus.LOADED,
-        data: action.payload
-      }
+        data: action.payload,
+      };
+
+    case BeersActionTypes.CHANGE_PAGE:
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          page: action.payload,
+        },
+      };
 
     default:
-      return state
+      return state;
   }
 }

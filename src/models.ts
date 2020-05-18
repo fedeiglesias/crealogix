@@ -3,7 +3,8 @@ export interface IBeerItem {
   name: string;
   tagline: string;
   description: string;
-  first_brewed: string;
+  first_brewed: Date;
+  image_url: string;
 }
 
 export enum ApiStatus {

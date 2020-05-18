@@ -14,6 +14,7 @@ module.exports = {
     require('postcss-preset-env')({
       /* use stage 2 features (defaults) */
       stage: 0,
+      autoprefixer: true,
       features: {
         'nesting-rules': true,
       },

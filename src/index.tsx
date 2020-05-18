@@ -5,14 +5,15 @@ import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 
 import store from './store';
-import AppContainer from './containers/AppContainer';
+//import AppContainer from './containers/AppContainer';
+import App from './components/App';
 
 const history = createBrowserHistory();
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <AppContainer />
+      <App />
     </Router>
   </Provider>,
   document.getElementById('app')

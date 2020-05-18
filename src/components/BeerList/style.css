@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 900px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  margin-top: 40px;
+
+  & .results {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    & > div {
+      max-width: 45%;
+      margin: 10px;
+    }
+
+    @media (max-width: 481px) {
+      & > div {
+        max-width: 100%;
+      }
+    }
+  }
+
+  & .pagination {
+    display: flex;
+    justify-content: center;
+  }
+}

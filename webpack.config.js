@@ -12,6 +12,8 @@ const outPath = path.join(__dirname, './build');
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const {
   CleanWebpackPlugin,
 } = require('clean-webpack-plugin');
@@ -141,6 +143,9 @@ module.exports = {
           ? package.keywords.join(',')
           : undefined,
       },
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: '../public' }],
     }),
   ],
   devServer: {
