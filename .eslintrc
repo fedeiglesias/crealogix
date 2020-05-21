@@ -17,7 +17,8 @@
     "@typescript-eslint/interface-name-prefix": [
       "error",
       "always"
-    ]
+    ],
+    "@typescript-eslint/camelcase": ["error", "never"]
   },
   "settings": {
     "react": {

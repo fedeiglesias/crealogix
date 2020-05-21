@@ -55,6 +55,24 @@ export default function beersReducer(
         },
       };
 
+    case BeersActionTypes.SET_FILTER_BREWED_DATE_FROM:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          from: action.payload,
+        },
+      };
+
+    case BeersActionTypes.SET_FILTER_BREWED_DATE_TO:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          to: action.payload,
+        },
+      };
+
     default:
       return state;
   }

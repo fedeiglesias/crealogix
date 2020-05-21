@@ -9,10 +9,35 @@ const selectBeersFilters = (state: IState) =>
 const selectBeersPagination = (state: IState) =>
   state.beers.pagination;
 
-// TODO: Create filters selector
+export const selectBeerByBrewDate = (
+  mode: 'newest' | 'oldest'
+) =>
+  createSelector(selectAllBeers, allBeers => {
+    if (!allBeers.length)
+      return { first_brewed: new Date() } as IBeerItem;
+    return allBeers.reduce((prev, curr) => {
+      if (mode === 'oldest')
+        return prev.first_brewed < curr.first_brewed
+          ? prev
+          : curr;
+      return prev.first_brewed > curr.first_brewed
+        ? prev
+        : curr;
+    });
+  });
+
 export const selectBeersFiltered = createSelector(
   [selectAllBeers, selectBeersFilters],
-  (allBeers, allFilters) => allBeers.filter(beer => true)
+  (allBeers, allFilters) =>
+    allBeers.filter(
+      beer =>
+        (allFilters.from
+          ? beer.first_brewed >= allFilters.from
+          : true) &&
+        (allFilters.to
+          ? beer.first_brewed <= allFilters.to
+          : true)
+    )
 );
 
 export const selectBeersPaginated = createSelector(

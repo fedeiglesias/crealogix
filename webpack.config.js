@@ -133,11 +133,7 @@ module.exports = {
         collapseWhitespace: true,
         collapseInlineTagWhitespace: true,
       },
-      append: {
-        head: `<script src="//cdn.polyfill.io/v3/polyfill.min.js"></script>`,
-      },
       meta: {
-        title: package.name,
         description: package.description,
         keywords: Array.isArray(package.keywords)
           ? package.keywords.join(',')

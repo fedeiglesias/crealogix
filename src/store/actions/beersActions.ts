@@ -6,6 +6,8 @@ export enum BeersActionTypes {
   LOADED_BEERS = 'beers/loaded',
   LOADING_BEERS_FAILED = 'beers/loading_failed',
   CHANGE_PAGE = 'beers/change_page',
+  SET_FILTER_BREWED_DATE_FROM = 'beers/set_filter_brewed_date_from',
+  SET_FILTER_BREWED_DATE_TO = 'beers/set_filter_brewed_date_to',
 }
 
 export function loadBeers(): ILoadBeersAction {
@@ -44,6 +46,24 @@ export function changePage(
   };
 }
 
+export function setFilterBrewedDateFrom(
+  date: Date
+): IsetFilterBrewedDateFromAction {
+  return {
+    type: BeersActionTypes.SET_FILTER_BREWED_DATE_FROM,
+    payload: date,
+  };
+}
+
+export function setFilterBrewedDateTo(
+  date: Date
+): IsetFilterBrewedDateToAction {
+  return {
+    type: BeersActionTypes.SET_FILTER_BREWED_DATE_TO,
+    payload: date,
+  };
+}
+
 // Interfaces
 
 export interface ILoadBeersAction {
@@ -68,9 +88,21 @@ export interface IChangePageAction {
   payload: number;
 }
 
+export interface IsetFilterBrewedDateFromAction {
+  type: BeersActionTypes.SET_FILTER_BREWED_DATE_FROM;
+  payload: Date;
+}
+
+export interface IsetFilterBrewedDateToAction {
+  type: BeersActionTypes.SET_FILTER_BREWED_DATE_TO;
+  payload: Date;
+}
+
 export type BeersAction =
   | ILoadBeersAction
   | ILoadingBeersAction
   | ILoadedBeersAction
   | ILoadingBeersFailedAction
-  | IChangePageAction;
+  | IChangePageAction
+  | IsetFilterBrewedDateFromAction
+  | IsetFilterBrewedDateToAction;
