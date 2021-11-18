@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Craft Beers Catalog",
-  "homepage": "https://crealogix.pixium.io",
+  "homepage": "https://crealogix.fedeiglesias.com",
   "keywords": [
     "react",
     "hooks",
@@ -64,7 +64,6 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "serverless-plugin-scripts": "^1.0.2",
-    "serverless-pseudo-parameters": "^2.5.0",
     "serverless-s3-sync": "^1.14.1",
     "style-loader": "^1.2.1",
     "ts-loader": "^7.0.4",

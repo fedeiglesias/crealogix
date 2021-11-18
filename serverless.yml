@@ -1,26 +1,29 @@
-service: crealogix
+service:
+  name: crealogix
 
 # app and org for use with dashboard.serverless.com
 app: crealogix
 org: fedeiglesias
 
+variablesResolutionMode: 20210326
+
 plugins:
-  - serverless-pseudo-parameters
   - serverless-plugin-scripts
   - serverless-s3-sync
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
+  stage: dev
 
 custom:
   domain:
     # AWS domain id
-    id: 'Z008637234M1UDGEMIGLS'
-    name: pixium.io
-    subdomain: crealogix.pixium.io
+    id: 'ZJKMN1QK0FD9S'
+    name: fedeiglesias.com
+    subdomain: crealogix.fedeiglesias.com
     # AWS certificate domain arn
-    certificateArn: arn:aws:acm:us-east-1:989257975727:certificate/af08c4cc-6b8d-4b21-a831-dce800e7001c
+    certificateArn: arn:aws:acm:us-east-1:989257975727:certificate/735f4bd6-85db-4cd6-89a2-dcec2bec7d49
 
   # Bucket name
   s3Bucket: ${self:service.name}-bucket
